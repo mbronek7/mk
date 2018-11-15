@@ -1,0 +1,26 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+
+build-master:
+  stage: build
+  script:
+    - docker login -u admin -p password https://registry.home.lab:5000
+    - docker build --pull -t "registry.home.lab:5000/csp-consumer:latest" .
+    - docker push registry.home.lab:5000/csp-consumer:latest
+  only:
+    - master
+    
+development:
+  stage: deploy
+  script:
+    - export NOMAD_ADDR=http://172.28.128.11:4646
+    - nomad job run .nomad
+  only:
+    - master
+  when: manual
+    
