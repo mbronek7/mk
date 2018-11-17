@@ -1,0 +1,1 @@
+consul agent -server -bootstrap-expect=1 -bind=172.28.128.1 --data-dir=/home/sobczam/consul -client=172.28.128.1 -ui
