@@ -1,0 +1,14 @@
+GEM
+  specs:
+    rack (2.0.6)
+    warden (1.2.8)
+      rack (>= 2.0.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  warden
+
+BUNDLED WITH
+   1.16.2
