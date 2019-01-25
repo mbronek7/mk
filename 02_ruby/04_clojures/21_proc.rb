@@ -4,4 +4,5 @@ def call_proc(my_proc)
 end
 count   = 1
 my_proc = Proc.new { puts count }
-p call_proc(my_proc) # What does this print?
+p call_proc(my_proc)
+
