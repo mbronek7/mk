@@ -3,7 +3,7 @@ tree = {}
 ObjectSpace.each_object(Class) do |cls|
   next unless cls.ancestors.include? Exception
   next if exceptions.include? cls
-  # avoid dumping Errno's
+  # Ograniczamy wyniki
   next if cls.superclass == SystemCallError 
   exceptions << cls
   cls.ancestors.delete_if { |e| 
@@ -12,7 +12,7 @@ ObjectSpace.each_object(Class) do |cls|
   	memo[cls] ||= {}
   }
 end
-
+# Przygotowanie wydruku
 indent = 0
 tree_printer = Proc.new do |t|
   t.keys.sort { |c1,c2| 
@@ -26,3 +26,4 @@ tree_printer = Proc.new do |t|
   end
 end
 tree_printer.call tree
+

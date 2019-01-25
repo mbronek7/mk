@@ -9,3 +9,4 @@ ObjectSpace.define_finalizer(a, proc { |id|
 ObjectSpace.define_finalizer(b, proc { |id| 
 	puts "Finalizer two on #{id}" 
 })
+
