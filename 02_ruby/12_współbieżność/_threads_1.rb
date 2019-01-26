@@ -5,24 +5,25 @@ producer = Thread.new {
   100000.times do
     q << c
     c += 1
-  end
-}
+  end # times
+} # Thread.new
 printer1 = Thread.new {
   while true
     puts q.size
     val = q.shift
     print_monitor.synchronize do
       puts "Thread 1: #{val}"
-    end
+    end # synchronize
   end
-}
+} # Thread.new
 printer2 = Thread.new {
   while true
     puts q.size
     val = q.shift
     print_monitor.synchronize do
       puts "Thread 2: #{val}"
-    end
-  end
-}
+    end # synchronize
+  end # while
+} # Thread.new
 [producer, printer1, printer2].each { |t| t.join }
+
