@@ -1,5 +1,5 @@
 #include "ruby.h"
-#include "3d.c"
+#include "68_3d.c"
 
 static VALUE t_init(VALUE self)
 {

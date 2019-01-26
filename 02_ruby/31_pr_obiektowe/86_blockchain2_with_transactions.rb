@@ -1,49 +1,43 @@
-###########################
-#  build your own blockchain from scratch in 20 lines of ruby!
+#*******************************************************************************
+# --- Implementacja Blockchain I ---
 #
-#  to run use:
-#    $ ruby ./blockchain_with_transactions.rb
-
+# * Użycie:
+#     ruby ./86_blockchain2_with_transactions.rb
 #
-#  transactions (hyper) ledger / book:
+# * Transakcje w łańcuchu (bloków) / księdze:
 #
-#  from: Dutchgrown       to: Vincent    what: Tulip Bloemendaal Sunset   qty: 10
-#  from: Keukenhof        to: Anne       what: Tulip Semper Augustus      qty: 7
+# from: Dutchgrown       to: Vincent    what: Tulip Bloemendaal Sunset   qty: 10
+# from: Keukenhof        to: Anne       what: Tulip Semper Augustus      qty: 7
 #
-#  from: Flowers          to: Ruben      what: Tulip Admiral van Eijck    qty: 5
-#  from: Vicent           to: Anne       what: Tulip Bloemendaal Sunset   qty: 3
-#  from: Anne             to: Julia      what: Tulip Semper Augustus      qty: 1
-#  from: Julia            to: Luuk       what: Tulip Semper Augustus      qty: 1
+# from: Flowers          to: Ruben      what: Tulip Admiral van Eijck    qty: 5
+# from: Vicent           to: Anne       what: Tulip Bloemendaal Sunset   qty: 3
+# from: Anne             to: Julia      what: Tulip Semper Augustus      qty: 1
+# from: Julia            to: Luuk       what: Tulip Semper Augustus      qty: 1
 #
-#  from: Bloom & Blossom  to: Daisy      what: Tulip Admiral of Admirals  qty: 8
-#  from: Vincent          to: Max        what: Tulip Bloemendaal Sunset   qty: 2
-#  from: Anne             to: Martijn    what: Tulip Semper Augustus      qty: 2
-#  from: Ruben            to: Julia      what: Tulip Admiral van Eijck    qty: 2
+# from: Bloom & Blossom  to: Daisy      what: Tulip Admiral of Admirals  qty: 8
+# from: Vincent          to: Max        what: Tulip Bloemendaal Sunset   qty: 2
+# from: Anne             to: Martijn    what: Tulip Semper Augustus      qty: 2
+# from: Ruben            to: Julia      what: Tulip Admiral van Eijck    qty: 2
 #
-#  from: Teleflora        to: Max        what: Tulip Red Impression       qty: 11
-#  from: Anne             to: Naomi      what: Tulip Bloemendaal Sunset   qty: 1
-#  from: Daisy            to: Vincent    what: Tulip Admiral of Admirals  qty: 3
-#  from: Julia            to: Mina       what: Tulip Admiral van Eijck    qty: 1
+# from: Teleflora        to: Max        what: Tulip Red Impression       qty: 11
+# from: Anne             to: Naomi      what: Tulip Bloemendaal Sunset   qty: 1
+# from: Daisy            to: Vincent    what: Tulip Admiral of Admirals  qty: 3
+# from: Julia            to: Mina       what: Tulip Admiral van Eijck    qty: 1
 #
-#  from: Max              to: Isabel     what: Tulip Red Impression       qty: 2
+# from: Max              to: Isabel     what: Tulip Red Impression       qty: 2
 #
-# (source: tulips on the blockchain - public distributed (hyper) ledger
+# (źródło: tulips on the blockchain - public distributed (hyper) ledger
 #    @ github.com/openblockchains/tulips )
-
-
-require "digest"    # for hash checksum digest function SHA256
-require "pp"        # for pp => pretty printer
-
-
+#*******************************************************************************
+require "digest"    # hash checksum digest function SHA256
+require "pp"        
 class Block
-
   attr_reader :index
   attr_reader :timestamp
   attr_reader :transactions
   attr_reader :transactions_count
   attr_reader :previous_hash
   attr_reader :hash
-
   def initialize(index, transactions, previous_hash)
     @index              = index
     @timestamp          = Time.now.utc
@@ -51,8 +45,7 @@ class Block
     @transactions_count = transactions.size
     @previous_hash      = previous_hash
     @hash               = calc_hash
-  end
-
+  end # initialize
   def calc_hash
     sha = Digest::SHA256.new
     sha.update( @index.to_s +
@@ -61,56 +54,42 @@ class Block
                 @transactions.to_s +
                 @previous_hash )
     sha.hexdigest
-  end
-
-
-  ##  ruby note: the splat operator (that is, *) turns list of passed in transactions into array
-  def self.first( *transactions )    # create genesis (big bang! first) block
-    ## uses index zero (0) and arbitrary previous_hash ("0")
+  end # calc_hash
+  # Operator * konwertuje listę w tablicę
+  def self.first( *transactions ) 
+    # Początek łańcucha
     Block.new( 0, transactions, "0" )
-  end
-
+  end # first
   def self.next( previous, *transactions )
     Block.new( previous.index+1, transactions, previous.hash )
-  end
-
-end  # class Block
-
-
-#####
-## let's get started
-##   build a blockchain a block at a time
-
+  end # next
+end # Block
+#
+# -- Budowanie łańcucha bloków ---
+# 
 b0 = Block.first(
         { from: "Dutchgrown", to: "Vincent", what: "Tulip Bloemendaal Sunset", qty: 10 },
         { from: "Keukenhof",  to: "Anne",    what: "Tulip Semper Augustus",    qty: 7  } )
-
 b1 = Block.next( b0,
         { from: "Flowers", to: "Ruben", what: "Tulip Admiral van Eijck",  qty: 5 },
         { from: "Vicent",  to: "Anne",  what: "Tulip Bloemendaal Sunset", qty: 3 },
         { from: "Anne",    to: "Julia", what: "Tulip Semper Augustus",    qty: 1 },
         { from: "Julia",   to: "Luuk",  what: "Tulip Semper Augustus",    qty: 1 } )
-
 b2 = Block.next( b1,
         { from: "Bloom & Blossom", to: "Daisy",   what: "Tulip Admiral of Admirals", qty: 8 },
         { from: "Vincent",         to: "Max",     what: "Tulip Bloemendaal Sunset",  qty: 2 },
         { from: "Anne",            to: "Martijn", what: "Tulip Semper Augustus",     qty: 2 },
         { from: "Ruben",           to: "Julia",   what: "Tulip Admiral van Eijck",   qty: 2 } )
-
 b3 = Block.next( b2,
         { from: "Teleflora", to: "Max",     what: "Tulip Red Impression",      qty: 11 },
         { from: "Anne",      to: "Naomi",   what: "Tulip Bloemendaal Sunset",  qty: 1  },
         { from: "Daisy",     to: "Vincent", what: "Tulip Admiral of Admirals", qty: 3  },
         { from: "Julia",     to: "Mina",    what: "Tulip Admiral van Eijck",   qty: 1  } )
-
-
 blockchain = [b0, b1, b2, b3]
-
 pp blockchain
-
-######
-#  will pretty print (pp) something like:
 #
+#  --- Przykładowy wydruk ---
+
 # [#<Block:0x2da3da0
 #   @hash="32bd169baebba0b70491b748329ab631c85175be15e1672f924ca174f628cb66",
 #   @index=0,
@@ -156,3 +135,4 @@ pp blockchain
 #     {:from=>"Daisy",     :to=>"Vincent", :what=>"Tulip Admiral of Admirals", :qty=>3},
 #     {:from=>"Julia",     :to=>"Mina",    :what=>"Tulip Admiral van Eijck",   :qty=>1}],
 #   @transactions_count=4>]
+

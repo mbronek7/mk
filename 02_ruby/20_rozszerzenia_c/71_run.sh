@@ -1,4 +1,5 @@
 make clean
 make 
 make install
-ruby test.rb
+ruby 71_test.rb
+

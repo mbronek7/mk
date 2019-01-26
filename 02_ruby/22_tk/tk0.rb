@@ -1,12 +1,13 @@
 require 'tk'  
 hello = TkRoot.new do  
   title "Sample window"  
-  # the min size of window  
+  # Minimalny rozmiar okna
   minsize(300,200)  
-end  
+end # TkRoot.new
 TkLabel.new(hello) do  
   text 'Hello, world!'  
   foreground 'black'  
   pack { padx 15; pady 15; side 'left'}  
-end  
+end # TkLabel.new
 Tk.mainloop 
+

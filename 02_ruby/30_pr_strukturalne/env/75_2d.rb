@@ -1,6 +1,7 @@
-#***************************
-# DATA
-#***************************
+#*******************************************************************************
+# Dane
+#*******************************************************************************
+
 $pixel_map = [[0x01, 0x08],
               [0x02, 0x10],
               [0x04, 0x20],
@@ -13,18 +14,17 @@ $current_x=0
 $current_y=0
 $screen_memory = ''
 
-
-#***************************
-# FUNCTIONS 
-#***************************
+#*******************************************************************************
+# Metody
+#*******************************************************************************
 
 #
-# FUNCTION
+# Nazwa
 #   get_pos
-# PARAMETERS
+# Parametry
 #   x
 #   y
-# RETURNING
+# Wynik
 #   2e vector
 #
 def get_pos(x,y)
@@ -32,58 +32,50 @@ def get_pos(x,y)
   _y = y
   return [_x/2,_y/4]
 end # get_pos 
-
-
 #
-# FUNCTION
+# Nazwa
 #   put_pixel
-# PARAMETERS
+# Parametry
 #   x
 #   y
-# RETURNING
-#   none*
+# Wynik
+#   Brak*
 #
 def put_pixel(x,y)
   coords = get_pos(x,y)
   $screen_map[coords[1]][coords[0]] |= $pixel_map[y % 4][x % 2]
 end # put_pixel
-
-
 #
-# FUNCTION
+# Nazwa
 #   draw_horizontal_border
-# PARAMETERS
-#   none
-# RETURNING
-#   printing characters
+# Parametry
+#   Brak
+# Wynik
+#   Wyświetlenie znaków
 #
 def draw_horizontal_border()
   ($SIZE+2).times do 
     $screen_memory = $screen_memory + '*'
   end # times
 end #draw_horizontal_border
-
-
 #
-# FUNCTION
+# Nazwa
 #   draw_new_line
-# PARAMETERS
-#   none
-# RETURNING
-#   printing new line
+# Parametry
+#   brak
+# Wynik
+#   Wyświetlenie nowego wiersza
 #
 def draw_new_line()
   $screen_memory = $screen_memory + "\n"
 end # draw_new_line
-
-
 #
-# FUNCTION
+# Nazwa
 #   draw_screen
-# PARAMETERS
+# Parametry
 #   none
-# RETURNING
-#   printing characters
+# Wynik
+#   Wyświetlenie znaków
 #
 def draw_screen()
   draw_horizontal_border
@@ -98,32 +90,28 @@ def draw_screen()
   draw_horizontal_border
   puts $screen_memory
 end # draw_screen
-
-
 #
-# FUNCTION
+# Nazwa
 #   clear_screen
-# PARAMETERS
-#   none
-# RETURNING
-#   printing characters
+# Parametry
+#   Brak
+# Wynik
+#   Wyczyszczenie ekranu
 #
 def clear_screen
   $screen_map=Array.new($SIZE){Array.new($SIZE,$braille_char_offset)}
   print "\e[H\e[2J"
   $screen_memory = ''
 end # clear_screen
-
-
 #
-# FUNCTION
+# Nazwa
 #   print_line_to
-# PARAMETERS
+# Parametry
 #   x1
 #   y1
 #   x0*,y0*
-# RETURNING
-#   printing characters
+# Wynik
+#   Wyświetlenie znaków
 #
 def print_line_to(x1,y1)
   tmp = get_current_cursor_pos()
@@ -132,46 +120,40 @@ def print_line_to(x1,y1)
   print_line(x0.to_f,y0.to_f, x1.to_f,y1.to_f)  
   put_cursor_at(x1,y1)
 end # print_line_to
-
-
 #
-# FUNCTION
+# Nazwa
 #   put_cursor_at
-# PARAMETERS
+# Parametry
 #   x
 #   y
-# RETURNING
-#   none*
+# Wynik
+#   Brak*
 #
 def put_cursor_at(x,y)
   $current_x = x
   $current_y = y
 end # put_cursor_at
-
-
 #
-# FUNCTION
+# Nazwa
 #   get_current_cursor_pos
-# PARAMETERS
-#   none
-# RETURNING
+# Parametry
+#   Brak
+# Wynik
 #   2e vector
 #
 def get_current_cursor_pos()
   return [$current_x,$current_y]
 end
-
-
 #
-# FUNCTION
+# Nazwa
 #   print_line
-# PARAMETERS
+# Parametry
 #   x0
 #   y0
 #   x1
 #   y1
-# RETURNING
-#   printing characters
+# Wynik
+#   Wyświetlenie znaków
 #
 def print_line(x0,y0,x1,y1)
   points = []
@@ -208,5 +190,5 @@ def print_line(x0,y0,x1,y1)
     end # if
   end # for
   return points
-
 end # get_line
+

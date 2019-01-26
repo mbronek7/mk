@@ -1,8 +1,11 @@
-/* *********************** */
-/* getT                    */
-/*   sin = 0               */
-/*   cos = 1               */
-/* *********************** */
+/*******************************************************************************
+* getT
+*   Mock
+*   funkcji trygonometrycznych
+*   Parametry:
+*     sin = 0
+*     cos = 1
+*******************************************************************************/
 int getT(int f, int val) {
   val = 0;
   if (f == 0) {
@@ -14,15 +17,15 @@ int getT(int f, int val) {
   else {
     return val;
   }
-} /* getT */
-/* *********************** */
-/* transform3Into2_NEW     */
-/* *********************** */
+} // getT
+/*******************************************************************************
+* transform3Into2_NEW
+*******************************************************************************/
 void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, int z, int cx, int cy, int cz, int th_x, int th_y, int th_z) {
-  /* *********************** */
-  /* DATA                    */
-  /* *********************** */
-  // floating point factor
+  //
+  // Dane
+  //
+  // współczynnik (implementacja tylko w oparciu o liczby całkowite)
   const int factor = 10;
   // matM                    
   int p1,p2,p3,p4,p5,p6,p7,p8,p9 = 0;
@@ -41,7 +44,7 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
     100,            100,               0                  ,
     100,            100,               0                  ,
     0,              0,                 1                  };
-  // d4 AND d5
+  // d4 and d5
   int d4[3] = {0,0,0};
   int d5[3] = {0,0,0};
   // matS
@@ -53,9 +56,9 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
   unsigned char newEntry_x = 0;
   unsigned char newEntry_y = 0;
   const unsigned char canvasWidthHalf = 160;
-  /* *********************** */
-  /* PROGRAM                 */
-  /* *********************** */
+  //
+  // Przetwarzanie
+  /
   // getM
   // d1
   d1[4] = getT(1, th_x);
@@ -121,32 +124,32 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
   d5[0] = cx;
   d5[1] = cy;
   d5[2] = cz;
-  /* *********************** */
-  /* matS                    */
-  /* *********************** */
+  //
+  // matS
+  //
   matS[0] = d4[0]-d5[0];
   matS[1] = d4[1]-d5[1];
   matS[2] = d4[2]-d5[2];
-  /* *********************** */
-  /* matMV                   */
-  /* *********************** */
+  //
+  // matMV
+  //
   p1 = matM2[0]*matS[0] + matM2[1]*matS[1] + matM2[2]*matS[2];
   p2 = matM2[3]*matS[0] + matM2[4]*matS[1] + matM2[5]*matS[2];
   p3 = matM2[6]*matS[0] + matM2[7]*matS[1] + matM2[8]*matS[2];
   matMV[0] = p1;
   matMV[1] = p2;
   matMV[2] = p3;
-  /* *********************** */
-  /* getB                    */
-  /* *********************** */
+  //
+  // getB
+  //
   ezDivDz = (-700*factor) / matMV[2];
   newEntry_x = -1*(matMV[0]*ezDivDz)/factor + canvasWidthHalf;
   newEntry_y = (matMV[1]*ezDivDz)/factor;
-  /* *********************** */
-  /* return                  */
-  /* *********************** */
+  /
+  // return
+  //
   *rx = newEntry_x;
   *ry = newEntry_y;
   return;
-} /* transform3Into2_NEW */
+} // transform3Into2_NEW 
 

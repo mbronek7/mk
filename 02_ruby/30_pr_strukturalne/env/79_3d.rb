@@ -1,14 +1,10 @@
-#***************************
-# FUNCTIONS 
-#***************************
-
 #
-# FUNCTION
+# Nazwa
 #   matM
-# PARAMETERS
+# Parametry
 #   a
 #   b
-# RETURNING
+# Wynik
 #   3x3 matrix*
 #
 def matM(a,b)
@@ -31,15 +27,13 @@ def matM(a,b)
     p7,p8,p9
   ]
 end # matM
-
-
 #
-# FUNCTION
+# Nazwa
 #   matMV
-# PARAMETERS
+# Parametry
 #   a
 #   b
-# RETURNING
+# Wynik
 #   3e vector
 #
 def matMV(a,b)
@@ -51,15 +45,13 @@ def matMV(a,b)
   #
   return [p1,p2,p3]
 end # matMV
-
-
 #
-# FUNCTION
+# Nazwa
 #   matS
-# PARAMETERS
+# Parametry
 #   a
 #   b
-# RETURNING
+# Wynik
 #   3e vector
 #
 def matS(a,b)
@@ -67,16 +59,14 @@ def matS(a,b)
     a[0]-b[0], a[1]-b[1], a[2]-b[2]
   ]
 end # matS
-
-
 #
-# FUNCTION
+# Nazwa
 #   getB
-# PARAMETERS
+# Parametry
 #   dx
 #   dy
 #   dz
-# RETURNING
+# Wynik
 #   2e vector
 #
 def getB(dx,dy,dz)
@@ -89,12 +79,12 @@ end # getB
 
 
 #
-# FUNCTION
+# Nazwa
 #   getT
-# PARAMETERS
+# Parametry
 #   f
 #   val
-# RETURNING
+# Wynik
 #   float*
 #
 def getT(f,val)
@@ -106,14 +96,12 @@ def getT(f,val)
   end # if
   return newEntry
 end # getT
-
-
 #
-# FUNCTION
+# Nazwa
 #   getM
-# PARAMETERS
+# Parametry
 #   th
-# RETURNING
+# Wynik
 #   3x3 matrix
 #
 def getM(th) 
@@ -135,12 +123,10 @@ def getM(th)
   #
   return newEntry
 end # getM
-
-
 #
-# FUNCTION
+# Nazwa
 #   transform_3_into_2
-# PARAMETERS
+# Parametry
 #   x
 #   y
 #   z
@@ -148,7 +134,7 @@ end # getM
 #   cy
 #   cz
 #   th
-# RETURNING
+# Wynik
 #   2e vector
 #
 def transform_3_into_2(x,y,z, cx,cy,cz, th)
@@ -172,3 +158,4 @@ def transform_3_into_2(x,y,z, cx,cy,cz, th)
   $vertices_counter=$vertices_counter+1
   return b
 end # transform_3_into_2
+

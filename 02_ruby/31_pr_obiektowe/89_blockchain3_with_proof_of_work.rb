@@ -1,77 +1,59 @@
-###########################
-#  build your own blockchain from scratch in ruby!
-#
-#  to run use:
-#    $ ruby ./blockchain_with_proof_of_work.rb
-
-
-require "digest"    # for hash checksum digest function SHA256
-require "pp"        # for pp => pretty printer
-
-
+#*******************************************************************************
+# --- Implementacja Blockchain II ---
+# * Użycie:
+#      ruby ./89_blockchain3_with_proof_of_work.rb
+#*******************************************************************************
+require "digest"      # hash checksum digest function SHA256
+require "pp"       
 class Block
-
   attr_reader :index
   attr_reader :timestamp
   attr_reader :data
   attr_reader :previous_hash
-  attr_reader :nonce        ## proof of work if hash starts with leading zeros (00)
+  attr_reader :nonce  # proof of work
   attr_reader :hash
-
   def initialize(index, data, previous_hash)
     @index         = index
     @timestamp     = Time.now
     @data          = data
     @previous_hash = previous_hash
     @nonce, @hash  = compute_hash_with_proof_of_work
-  end
-
-  def compute_hash_with_proof_of_work( difficulty="00ab" )
+  end # initialize
+  def compute_hash_with_proof_of_work(difficulty="00ab")
     nonce = 0
     loop do
       hash = calc_hash_with_nonce( nonce )
       if hash.start_with?( difficulty )
-        return [nonce,hash]    ## bingo! proof of work if hash starts with leading zeros (00)
+        return [nonce,hash] # proof of work jeśli rozpoczyna się od 00ab
       else
-        nonce += 1             ## keep trying (and trying and trying)
+        nonce += 1 
       end
     end
-  end
-
-  def calc_hash_with_nonce( nonce=0 )
+  end # compute_hash_with_proof_of_work
+  def calc_hash_with_nonce(nonce=0)
     sha = Digest::SHA256.new
     sha.update( nonce.to_s + @index.to_s + @timestamp.to_s + @data + @previous_hash )
     sha.hexdigest
-  end
-
-
-  def self.first( data="Genesis" )    # create genesis (big bang! first) block
-    ## uses index zero (0) and arbitrary previous_hash ("0")
+  end # calc_hash_with_nonce
+  def self.first(data="Genesis")  
+    # uses index zero (0) and arbitrary previous_hash ("0")
     Block.new( 0, data, "0" )
-  end
-
+  end # first
   def self.next( previous, data="Transaction Data..." )
     Block.new( previous.index+1, data, previous.hash )
-  end
-
-end  # class Block
-
-
-#####
-## let's get started
-##   build a blockchain a block at a time
-
+  end # next
+end # Block
+#
+# --- Budowanie łańcucha bloków ---
+#
 b0 = Block.first( "Genesis" )
 b1 = Block.next( b0, "Transaction Data..." )
 b2 = Block.next( b1, "Transaction Data......" )
 b3 = Block.next( b2, "More Transaction Data..." )
-
 blockchain = [b0, b1, b2, b3]
-
 pp blockchain
-
-######
-#  will pretty print (pp) something like:
+#
+#  --- Przykładowy wydruk ---
 #
 # [#<Block:0x1e204f0
 #   @data="Genesis",
@@ -104,3 +86,4 @@ pp blockchain
 #   @previous_hash=
 #    "00ea45e0f4683c3bec4364f349ee2b6816be0c9fd95cfd5ffcc6ed572c62f190",
 #   @timestamp=2017-09-20 20:13:38 +0200>]
+

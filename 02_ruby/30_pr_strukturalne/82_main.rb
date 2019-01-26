@@ -1,15 +1,13 @@
-#***************************
-# LIBRARIES                  
-#***************************
-load 'env/3d.rb'
-load 'env/2d.rb'
+#*******************************************************************************
+# Biblioteki
+#*******************************************************************************
+load 'env/79_3d.rb'
+load 'env/75_2d.rb'
 require 'benchmark'
-
-
-#***************************
-# DATA                  
-#***************************
-# GENERAL
+#*******************************************************************************
+# Dane
+#*******************************************************************************
+# Ogólne
 camera_x = 200
 camera_y = 335
 camera_z = -250
@@ -17,20 +15,18 @@ th = {x:0, y:0, z:0}
 start_x = 250
 start_y = 40
 start_z = 1500
-# STORAGE
+# Wierzchołki
 cube_2d = []
-# CONFIGURATION
+# Konfiguracja
 $canvasWidthHalf = 160
-# RUNTIME
+# Runtime
 $vertices_counter=0
 vc = 0
 measures = []
-
-
-#***************************
-# MODEL                  
-#***************************
-# VERTICES
+#*******************************************************************************
+# Model
+#*******************************************************************************
+# Wierzchołki
 cube_vertices = [
   -100,-100,100,
   -100,100,100,
@@ -41,7 +37,7 @@ cube_vertices = [
   100,-100,-100,
   100,100,-100
 ]
-# FACES
+# Płaszczyzny
 cube_faces = [
   2,4,3,1,
   4,8,7,3,
@@ -50,17 +46,13 @@ cube_faces = [
   1,3,7,5,
   6,8,4,2
 ] 
-
-
-#***************************
-# PROGRAM
-#***************************
-#
+#*******************************************************************************
+# Przetwarzanie
+#*******************************************************************************
 100.times do
   time = Benchmark.realtime do
     vc = 0
-    #
-    # VERTICES CALCULATION
+    # Wierzchołki
     for vi in (0..(cube_vertices.size-3)).step(3)
       x2 = start_x+cube_vertices[vi+0]
       y2 = start_y+cube_vertices[vi+1]
@@ -73,8 +65,7 @@ cube_faces = [
       cube_2d[vc+1] = point[:y]
       vc+=2
     end # for 
-    #
-    # FACES  
+    # Płaszczyzny  
     initial_x = cube_2d[2]
     initial_y = cube_2d[3] 
     put_cursor_at(initial_x, initial_y)
@@ -91,11 +82,11 @@ cube_faces = [
     start_y = start_y - 5
     if ARGV[0].to_s == "runtime" then sleep 0.02 end
     clear_screen
-  end # benchmark 
+  end # Benchmark.realtime 
   measures << time
-end # while
-
-#***************************
-# BENCHMARK
-#***************************
+end # times
+#*******************************************************************************
+# Benchmark
+#*******************************************************************************
 puts measures.inspect
+

@@ -1,12 +1,12 @@
 #include <ruby.h>
-
 int main(int argc, char* argv[])
 {
-	/* construct the VM */
+	// Utworzenie VM
 	ruby_init();
 
-	/* Ruby goes here */
+	// Tutaj kod Ruby
 
-	/* destruct the VM */
+	// Wyłączenie VM
 	return ruby_cleanup(0);
-}
+} // main
+
