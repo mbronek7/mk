@@ -8,6 +8,6 @@ end
 puts return_binding.class
 puts return_binding.eval('foo')
 # Bezpośrednie wywołanie spowoduje błąd.
-# Foo nie jest bowiem zdefiniowane globalnie.
+# foo nie jest bowiem zdefiniowane globalnie.
 puts foo
 

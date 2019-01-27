@@ -13,11 +13,11 @@ lam
 lam = lambda { |x| puts x }    
 lam.call(2)                    # Wyświetla 2
 # ArgumentError: wrong number of arguments (0 for 1)
-# lam.call       
+lam.call       
 # ArgumentError: wrong number of arguments (3 for 1)
-# lam.call(1,2,3)
+lam.call(1,2,3)
 
-# tworzy 
+# tworzy Proc z jednym argumentem
 proc = Proc.new { |x| puts x } 
 proc.call(2)                   # Wyświetla 2
 proc.call                      # Zwraca nil

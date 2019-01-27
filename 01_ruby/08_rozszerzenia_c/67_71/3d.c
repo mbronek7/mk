@@ -58,7 +58,7 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
   const unsigned char canvasWidthHalf = 160;
   //
   // Przetwarzanie
-  /
+  //
   // getM
   // d1
   d1[4] = getT(1, th_x);
@@ -115,7 +115,7 @@ void transform3Into2_NEW(unsigned char * rx, unsigned char * ry, int x, int y, i
   matM2[6] = p7;
   matM2[7] = p8;
   matM2[8] = p9;
-  // d4 AND d5
+  // d4 i d5
   // d4
   d4[0] = x;
   d4[1] = y;

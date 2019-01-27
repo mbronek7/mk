@@ -15,8 +15,10 @@ NUM_WORKERS.times do |i|
   DRb.start_service("druby://:700#{i}", Worker.new)
   puts "Worker running at #{DRb.uri}"
 end # NUM_WORKERS.times
-# DrbObject.new
-workers = NUM_WORKERS.times.map { |i| DRbObject.new nil, "druby://:700#{i}" }
+# Workers
+workers = NUM_WORKERS.times.map { |i| 
+  DRbObject.new nil, "druby://:700#{i}" 
+}
 # Wątki
 thread_pool = []
 NUM_WORKERS.times do |i|

@@ -3,7 +3,6 @@ def explicit_block(&block)
 end
 explicit_block { puts "Explicit block called" }
 
-
 def do_something_with_block
   return "No block given" unless block_given?
   yield

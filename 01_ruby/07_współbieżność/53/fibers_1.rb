@@ -21,3 +21,4 @@ puts counter.next
 # => 1
 puts counter.next
 # => 2
+

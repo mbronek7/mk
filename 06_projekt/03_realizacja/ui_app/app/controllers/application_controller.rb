@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   around_action :handle_execute_action
-
   def handle_execute_action
     @e = Execution.new
     @e.action = params[:controller] + "#" + params[:action]
@@ -16,4 +15,5 @@ class ApplicationController < ActionController::Base
       yield
     @e.touch
   end # handle_execute_action
-end
+end # ApplicationController
+

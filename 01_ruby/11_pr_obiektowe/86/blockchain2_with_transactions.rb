@@ -3,7 +3,6 @@
 #
 # * Użycie:
 #     ruby blockchain2_with_transactions.rb
-#
 # * Transakcje w łańcuchu (bloków) / księdze:
 #
 # from: Dutchgrown       to: Vincent    what: Tulip Bloemendaal Sunset   qty: 10
@@ -89,7 +88,7 @@ blockchain = [b0, b1, b2, b3]
 pp blockchain
 #
 #  --- Przykładowy wydruk ---
-
+#
 # [#<Block:0x2da3da0
 #   @hash="32bd169baebba0b70491b748329ab631c85175be15e1672f924ca174f628cb66",
 #   @index=0,

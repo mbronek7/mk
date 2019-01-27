@@ -15,7 +15,7 @@ namespace :runner do
       end # group.each_with_index
     end # find_in_batches
     @e.touch
-    puts "runner:sample ==> FINISH==> " + Time.now.to_s
+    puts "runner:sample ==> FINISH ==> " + Time.now.to_s
     mem = GetProcessMem.new
     puts mem.mb
   end # sample

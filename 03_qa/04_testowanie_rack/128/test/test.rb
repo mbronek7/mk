@@ -18,7 +18,7 @@ class RackProxyTestSuite < MiniTest::Test
       assert_equal (last_response.status).to_i, 200
     rescue Exception => e    
       assert_equal "!: no backend available", e.to_s
-    end
+    end # begin/rescue
   end # test_no_backend_available
 end # RackProxyTestSuite
 

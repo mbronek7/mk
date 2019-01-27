@@ -1,6 +1,6 @@
 ActiveRecord::Base.connection.tables.each do |table|
-  #if table == "schema_migrations" then next end
-  #if table == "ar_internal_metadata" then next end
+  # if table == "schema_migrations" then next end
+  # if table == "ar_internal_metadata" then next end
   grid_class = "#{table}_grid".classify
   model_class = table.classify
   eval <<DYNAMIC
@@ -20,4 +20,4 @@ ActiveRecord::Base.connection.tables.each do |table|
       }
     end
 DYNAMIC
-end
+end # tables

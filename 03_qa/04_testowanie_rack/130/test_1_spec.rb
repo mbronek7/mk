@@ -1,5 +1,4 @@
 load 'application.rb'
-
 describe Application do
   context "get to /ruby/monstas" do
     let(:app)      { Application.new }

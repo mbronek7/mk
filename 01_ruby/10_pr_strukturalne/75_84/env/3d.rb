@@ -76,26 +76,6 @@ def getB(dx,dy,dz)
   newEntry[:y] = dy*ezDivDz
   return newEntry
 end # getB
-
-
-#
-# Nazwa
-#   getT
-# Parametry
-#   f
-#   val
-# Wynik
-#   float*
-#
-def getT(f,val)
-  newEntry = nil
-  if (f == "sin") then
-    newEntry = Math.sin(val)
-  elsif (f == "cos") then
-    newEntry = Math.cos(val)
-  end # if
-  return newEntry
-end # getT
 #
 # Nazwa
 #   getM
@@ -106,17 +86,17 @@ end # getT
 #
 def getM(th) 
   d1 = [
-    1, 0,                  0                    ,
-    0, getT("cos",th[:x]), -1*getT("sin",th[:x]),
-    0, getT("sin",th[:x]), getT("cos",th[:x])   ]
+    1, 0,                  0                  ,
+    0, Math.cos(th[:x]),   -1*Math.sin(th[:x]),
+    0, Math.sin(th[:x]),   Math.cos(th[:x]) ]
   d2 = [
-    getT("cos",th[:y]),    0, getT("sin",th[:y]),
+    Math.cos(th[:y]),      0, Math.sin(th[:y]),
     0,                     1, 0               ,
-    -1*getT("sin",th[:y]), 0, getT("cos",th[:y])]
+    -1*Math.sin(th[:y]),   0, Math.cos(th[:y])]
   d3 = [
-    getT("cos",th[:z]), -1*getT("sin",th[:z]), 0,
-    getT("sin",th[:z]), getT("cos",th[:z]),    0,
-    0,                  0,                     1]
+    Math.cos(th[:z]),   -1*Math.sin(th[:z]),  0,
+    Math.sin(th[:z]),   Math.cos(th[:z]),     0,
+    0,                  0,                    1]
   #
   d1d2 = matM(d1,d2)
   newEntry = matM(d1d2,d3)

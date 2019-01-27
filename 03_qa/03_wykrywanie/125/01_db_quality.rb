@@ -89,7 +89,7 @@ tables.each do |table|
       end # top10
       bottom10.each do |t| 
         bottoms << top_bottom(t)
-      end # 
+      end # bottom10
       attrs[:tops] = tops
       attrs[:bottoms] = bottoms
     else

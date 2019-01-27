@@ -1,0 +1,21 @@
+# This file is a template, and might need editing before it works on your project.
+FROM ruby:2.5
+# Edit with nodejs, mysql-client, postgresql-client, sqlite3, etc. for your needs.
+# Or delete entirely if not needed.
+RUN ip addr
+RUN hostname
+RUN ping -c 5 8.8.8.8
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        nodejs \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
+WORKDIR /usr/src/app
+COPY Gemfile Gemfile.lock /usr/src/app/
+RUN bundle install -j $(nproc)
+COPY . /usr/src/app
+EXPOSE 9292
+CMD ["puma", "-t", "8:32", "-w", "2", "config.ru"]
+

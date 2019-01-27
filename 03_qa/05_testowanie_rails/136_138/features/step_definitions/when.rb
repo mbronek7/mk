@@ -22,7 +22,6 @@ When /^I click by xpath "(.*?)"$/ do |xpath|
 end
 When /^I press key "(.*?)" on "(.*?)"$/ do |key,id|
   key_int = key.to_i
-  # page.evaluate_script("var e = $.Event('keydown', { keyCode:#{key_int} }); $('##{id}').trigger(e);")
   page.find("##{id}").native.send_keys key.to_sym
 end
 When /^I select "(.*?)" with "(.*?)"$/ do |arg1, arg2|
